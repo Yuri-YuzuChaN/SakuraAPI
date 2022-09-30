@@ -201,7 +201,6 @@ namespace SakuraAPI.Osu
                 case TaikoDifficultyAttributes taiko:
                     result.Add("MaxCombo", taiko.MaxCombo);
                     result.Add("HitWindow", taiko.GreatHitWindow);
-                    result.Add("AR", taiko.ApproachRate);
                     MaxCombo = taiko.MaxCombo;
                     break;
                 case CatchDifficultyAttributes @catch:
@@ -219,7 +218,7 @@ namespace SakuraAPI.Osu
                 score.ScoreInfo.MaxCombo = MaxCombo;
             }
 
-            PPCalculator = score.ScoreInfo.Ruleset.CreateInstance().CreatePerformanceCalculator();
+            PPCalculator = score.ScoreInfo.Ruleset.CreateInstance().CreatePerformanceCalculator()!;
             // 计算已记录数据的PP结果
             PPAttributes = PPCalculator.Calculate(score.ScoreInfo, workingBeatmap);
             Dictionary<string, object> PPAttributeValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(PPAttributes)) ?? new Dictionary<string, object>();
@@ -289,7 +288,7 @@ namespace SakuraAPI.Osu
             score2.ScoreInfo.Statistics = Statistics;
             score2.ScoreInfo.ModsJson = ModsList.ToString();
 
-            PPCalculator = score2.ScoreInfo.Ruleset.CreateInstance().CreatePerformanceCalculator();
+            PPCalculator = score2.ScoreInfo.Ruleset.CreateInstance().CreatePerformanceCalculator()!;
             // 计算已记录数据的PP结果
             PPAttributes = PPCalculator?.Calculate(score2.ScoreInfo, workingBeatmap)!;
 
@@ -361,7 +360,7 @@ namespace SakuraAPI.Osu
             score2.ScoreInfo.Statistics = Statistics;
             score2.ScoreInfo.ModsJson = ModsList.ToString();
 
-            PPCalculator = score2.ScoreInfo.Ruleset.CreateInstance().CreatePerformanceCalculator();
+            PPCalculator = score2.ScoreInfo.Ruleset.CreateInstance().CreatePerformanceCalculator()!;
             // 计算已记录数据的PP结果
             PPAttributes = PPCalculator?.Calculate(score2.ScoreInfo, workingBeatmap)!;
 
